@@ -1,4 +1,8 @@
 <?php
+// Recibir los valores de precio mínimo y máximo
+$precioMin = isset($_POST['precioMin']) ? filter_var($_POST['precioMin'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : 0;
+$precioMax = isset($_POST['precioMax']) ? filter_var($_POST['precioMax'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : PHP_INT_MAX;
+
 session_start();
 session_regenerate_id(true); // Regenerar ID de sesión para mayor seguridad
 
@@ -44,8 +48,10 @@ $paquetesDisponibles = [
 ];
 
 // Filtrar paquetes según los datos proporcionados
-$resultados = array_filter($paquetesDisponibles, function($paquete) use ($destino, $fechaInicio, $fechaFin, $tipoServicio, $duracion) {
+$resultados = array_filter($paquetesDisponibles, function($paquete) use ($destino, $fechaInicio, $fechaFin, $tipoServicio, $duracion, $precioMin, $precioMax) {
     return $paquete['destino'] === $destino &&
+           $paquete['precio'] >= $precioMin &&
+           $paquete['precio'] <= $precioMax &&
            $paquete['fechaInicio'] === $fechaInicio &&
            $paquete['fechaFin'] === $fechaFin &&
            $paquete['tipoServicio'] === $tipoServicio &&

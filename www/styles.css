@@ -147,3 +147,11 @@ tr:hover {
         max-width: 90%;
     }
 }
+
+#cart-container button {
+    background-color: #ff5722;
+}
+
+#cart-container button:hover {
+    background-color: #e64a19;
+}
