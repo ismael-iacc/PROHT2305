@@ -21,6 +21,12 @@ if (empty($_SESSION['csrf_token'])) {
             </select>
             <input type="date" id="travel-date" name="fechaInicio" placeholder="Fecha de inicio del viaje" required />
             <input type="date" id="fechaFin" name="fechaFin" placeholder="Fecha de fin del viaje" required />
+            <label for="precio-min">Precio Mínimo:</label>
+            <input type="number" id="precio-min" placeholder="Min" />
+
+            <label for="precio-max">Precio Máximo:</label>  
+            <input type="number" id="precio-max" placeholder="Max" />
+
             <select id="service-type-select" name="tipoServicio" required>
                 <option value="">Selecciona un tipo de servicio</option>
                 <option value="hotel">Hotel</option>

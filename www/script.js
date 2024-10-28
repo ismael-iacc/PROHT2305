@@ -4,6 +4,8 @@ function search() {
     const fechaFin = document.getElementById("fechaFin").value;
     const serviceType = document.getElementById("service-type-select").value;
     const duracion = document.getElementById("duracion").value;
+    const precioMin = document.getElementById("precio-min").value;
+    const precioMax = document.getElementById("precio-max").value;
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const resultsContainer = document.getElementById("results-container");
 
@@ -17,7 +19,9 @@ function search() {
         formData.append("fechaFin", fechaFin);
         formData.append("tipoServicio", serviceType);
         formData.append("duracion", duracion);
-        formData.append("csrf_token", csrfToken); // Asegúrate de enviar el token
+        formData.append("precioMin", precioMin);
+        formData.append("precioMax", precioMax);
+        formData.append("csrf_token", csrfToken);
 
         fetch(url, {
             method: 'POST',
@@ -26,7 +30,6 @@ function search() {
         .then(response => response.json())
         .then(data => {
             if (data.error) {
-                console.error(data.error); // Mostrar errores de token en la consola
                 resultsContainer.innerHTML = `<p>Error: ${data.error}</p>`;
             } else if (data.paquete) {
                 const paquete = data.paquete;
